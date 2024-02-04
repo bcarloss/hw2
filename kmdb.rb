@@ -78,19 +78,27 @@
 # Do not use hard-coded foreign key IDs.
 # TODO!
 
-# Prints a header for the movies output
+# kmdb.rb
+
+#  Query the movies data and display the movies output.
 puts "Movies"
 puts "======"
 puts ""
 
-# Query the movies data and loop through the results to display the movies output.
-# TODO!
+Movie.includes(:studio).order(:year_released).each do |movie|
+  puts "#{movie.title.ljust(25)} #{movie.year_released.to_s.ljust(15)} #{movie.rated.ljust(6)} #{movie.studio.name}"
+end
 
-# Prints a header for the cast output
 puts ""
 puts "Top Cast"
 puts "========"
 puts ""
 
-# Query the cast data and loop through the results to display the cast output for each movie.
-# TODO!
+# Query the cast data and display the cast output for each movie.
+Movie.includes(roles: :actor).order(:year_released).each do |movie|
+  movie.roles.order('actors.name').each do |role|
+    puts "#{movie.title.ljust(25)} #{role.actor.name.ljust(20)} #{role.character_name}"
+  end
+end
+
+
