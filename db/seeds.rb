@@ -12,12 +12,6 @@ Movie.destroy_all
 Actor.destroy_all
 Role.destroy_all
 
-# Clear out the existing data
-Studio.destroy_all
-Movie.destroy_all
-Actor.destroy_all
-Role.destroy_all
-
 # Create the studio
 warner_bros = Studio.create!(name: "Warner Bros.")
 
