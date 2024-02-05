@@ -96,7 +96,7 @@ puts ""
 
 # Query the cast data and display the cast output for each movie.
 Movie.includes(roles: :actor).order(:year_released).each do |movie|
-  movie.roles.order('actors.name').each do |role|
+  movie.roles.joins(:actor).order('actors.name').each do |role|
     puts "#{movie.title.ljust(25)} #{role.actor.name.ljust(20)} #{role.character_name}"
   end
 end
